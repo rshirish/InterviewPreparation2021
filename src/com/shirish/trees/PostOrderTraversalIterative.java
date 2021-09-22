@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class InOrderTraversalIterative {
+public class PostOrderTraversalIterative {
 
-    /*
+      /*
                       1
                      /  \
                     2    3
@@ -29,35 +29,33 @@ public class InOrderTraversalIterative {
         root.right.right.left = new Node(9);
         root.right.right.right = new Node(10);
 
-        List<Integer> inOrder = inOrderTraversal(root);
-        System.out.println("Result : "+inOrder);
+        postOrderTraversal(root);
+        List<Integer> postOrder = postOrderTraversal(root);
+        System.out.println("Result : " + postOrder);
 
     }
 
-    private static List<Integer> inOrderTraversal(Node root) {
-        List<Integer> inOrder = new ArrayList<>();
-        Stack<Node> stack = new Stack<>();
+    private static List<Integer> postOrderTraversal(Node root) {
+        Stack<Node> stack1 = new Stack<>();
+        Stack<Node> stack2 = new Stack<>();
+        List<Integer> pot = new ArrayList<>();
         if(root == null)
-            return inOrder;
-       Node node = root;
-        while(true)
+            return pot;
+        stack1.add(root);
+        while(!stack1.isEmpty())
         {
-            if(node!= null) {
-                stack.push(node);
-                node = node.left;
-            }
-            else {
-                if(stack.isEmpty())
-                    break;
-                node = stack.pop();
-                inOrder.add(node.data);
-                node= node.right;
+            Node node = stack1.pop();
+            stack2.add(node);
+            if(node.left!=null)
+                stack1.add(node.left);
+            if(node.right!=null)
+                stack1.add(node.right);
 
-            }
         }
+        while (!stack2.isEmpty())
+            pot.add(stack2.pop().data);
 
+        return pot;
 
-        return inOrder;
     }
-
 }
