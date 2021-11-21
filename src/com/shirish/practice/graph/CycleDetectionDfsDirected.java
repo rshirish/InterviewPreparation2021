@@ -46,16 +46,14 @@ public class CycleDetectionDfsDirected {
     }
 
     private static boolean isCyclePresent(ArrayList<ArrayList<Integer>> adjList, int vertex) {
-        int [] visited = new int[vertex+1];
-        int [] visitedDfs = new int[vertex+1];
+        int[] visited = new int[vertex + 1];
+        int[] visitedDfs = new int[vertex + 1];
         for (int i = 1; i <= vertex; i++) {
-             if(visited[i] == 0)
-             {
-                 if(isCyclePresentInComponent(i, visited, visitedDfs, adjList))
-                 {
-                     return true;
-                 }
-             }
+            if (visited[i] == 0) {
+                if (isCyclePresentInComponent(i, visited, visitedDfs, adjList)) {
+                    return true;
+                }
+            }
         }
         return true;
     }
@@ -64,17 +62,12 @@ public class CycleDetectionDfsDirected {
         int node = source;
         visited[source] = 1;
         visitedDfs[source] = 1;
-        for(int it : adjList.get(source))
-        {
-            if(visited[it] == 0)
-            {
-                if(isCyclePresentInComponent(it, visited, visitedDfs, adjList))
-                {
+        for (int it : adjList.get(source)) {
+            if (visited[it] == 0) {
+                if (isCyclePresentInComponent(it, visited, visitedDfs, adjList)) {
                     return true;
                 }
-            }
-            else if(visitedDfs[it]==1)
-            {
+            } else if (visitedDfs[it] == 1) {
                 return true;
             }
         }
